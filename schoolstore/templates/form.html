@@ -1,0 +1,155 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>form</title>
+    <link href="{% static 'css/form.css' %}" rel="stylesheet">
+  </head>
+<body>
+<div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="index.html" class="navbar-brand px-lg-4 m-0" style="">
+                <img src="{% static 'img/output-onlinepngtools.png' %}" alt="Horizon High School Logo">
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" style="color:#82CE7C;" data-toggle="dropdown">Department</a>
+                        <div class="dropdown-menu text-capitalize" style="color:#82CE7C;">
+                            <a href="reservation.html" class="dropdown-item">Reservation</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                            {% if user.is_authenticated %}
+                              <a href="{% url 'login:logout' %}" class="nav-item nav-link" style="color:#82CE7C;">Log Out</a>
+                            {% else %}
+                              <a href="{% url 'login:login' %}" class="nav-item nav-link" style="color:#82CE7C;">Login</a>
+                              <a href="{% url 'register:register' %}" class="nav-item nav-link" style="color:#82CE7C;">Register</a>
+                            {% endif %}
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+   <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">DETAILS</h2>
+
+    <form  method="POST" id="sampleForm">
+        {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Full name" name="name" required>
+            </div>
+            <div class="form-group">
+               DOB:<input type="date" class="form-control" placeholder="DOB" name="DOB" required>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email" name="email" required>
+            </div>
+            <div class="form-group">
+
+                <input type="radio" id="male" name="gender" checked>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender">
+                <label for="female">Female</label>
+                <input type="radio" id="others" name="gender">
+                <label for="others">Others</label>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Enter student age" name="age" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" placeholder="Address" name="address" required></textarea><br>
+            </div>
+            <div class="form-group">
+              <input type="tel" class="form-control" placeholder="Phone number" name="phonenumber" required>
+            </div>
+
+    <div class="form-group">
+        <label for="department"></label>
+        <select id="department" class="form-control" required>
+            <option value="" disabled selected>Select a Department</option>
+            <option value="computer_science">Computer Science</option>
+            <option value="history">History</option>
+            <option value="economics">Economics</option>
+            <option value="art">Art and Art History</option>
+            <option value="mathematics">Mathematics</option>
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="subcourse"></label>
+        <select id="subcourse" class="form-control" required>
+            <option value="" disabled selected>Select a Sub-course</option>
+        </select>
+    </div>
+        <div class="form-group">
+        <label for="department"></label>
+        <select id="purpose" class="form-control" required>
+            <option value="" disabled selected>Select Purpose</option>
+            <option value="computer_science">Computer Science</option>
+            <option value="history">History</option>
+            <option value="economics">Economics</option>
+
+
+        </select>
+    </div>
+        <div class="form-group">
+          <input type="checkbox" id="agreementCheckbox" required>
+          <label for="agreementCheckbox">I agree to the terms and conditions</label>
+        </div>
+    <div class="d-grid gap-2" id="my_form">
+        <button class="btn btn-success" type="submit" id="submitButton">Submit</button>
+
+    </div>
+</form>
+
+           <div id="popup" class="pop_card">
+    <p>Profile submitted successfully! </p>
+    <p>click close to return to homepage</p>
+    <a href="/">
+        <button id="closePopup">Close</button>
+    </a>
+        </div>
+            <div id="overlay"></div>
+
+
+            <div id="warningMessage" class="alert alert-danger" style="display: none;">
+  Please fill out all required fields.
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/valid.js' %}"></script>
+    <script src="{% static 'js/submission.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

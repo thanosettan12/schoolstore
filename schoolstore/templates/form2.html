@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Form</title>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">DETAILS</h2>
+
+    <form action="{% url 'login:popup' %}" method="POST" id="sampleForm">
+        {% csrf_token %}
+            <div class="form-group">
+              <label><input type="text" class="form-control" placeholder="Full name" name="name" required></label>
+            </div>
+            <div class="form-group">
+              <label> DOB:<input type="date" class="form-control" placeholder="DOB" name="DOB" required></label>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email" name="email" required>
+            </div>
+            <div class="form-group">
+
+                <input type="radio" id="male" name="gender" checked>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender">
+                <label for="female">Female</label>
+                <input type="radio" id="others" name="gender">
+                <label for="others">Others</label>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Enter student age" name="age" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" placeholder="Address" name="address" required></textarea>
+            </div>
+            <div class="form-group">
+              <input type="tel" class="form-control" placeholder="Phone number" name="phonenumber" required>
+            </div>
+
+    <div class="form-group">
+        <label for="department">Select a Department:</label>
+        <select id="department" required>
+            <option value="" disabled selected>Select a Department</option>
+            <option value="computer_science">Computer Science</option>
+            <option value="history">History</option>
+            <option value="economics">Economics</option>
+            <!-- Add options for other departments here -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="subcourse">Select a Sub-course:</label>
+        <select id="subcourse" required>
+            <option value="" disabled selected>Select a Sub-course</option>
+        </select>
+    </div>
+    <div class="d-grid gap-2">
+        <button class="btn btn-success" type="submit" id="submitButton">Submit</button>
+
+    </div>
+</form>
+            <div id="warningMessage" class="alert alert-danger" style="display: none;">
+  Please fill out all required fields.
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<script src="{% static 'js/dropdown.js' %}"></script>
+<script src="{% static 'js/valid.js' %}"></script>
+</body>
+</html>
